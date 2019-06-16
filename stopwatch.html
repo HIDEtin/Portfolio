@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TIMER</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <style>
+    .container {
+        text-align: center;
+        margin: 30px auto;
+    }
+
+    #timer {
+        font-size: 40px;
+        border: 1px solid #ccc;
+        /* margin-top: 20px; */
+        padding: 10px;
+        background-color: black;
+        color: white;
+        border-radius: 3px;
+        box-shadow: 1px 1px 3px rgba(0,0,0,.5);        
+    }
+    .btn {
+        width: 100%;
+    }
+    #lap {
+        margin: 20px auto;
+        display: none; /* 初期状態では非表示 */
+    }
+    #lap li {
+        text-align: left;
+        font-size: 22px;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- タイマー表示部 -->
+        <div class="alert alert-primary">
+            <p id="timer">00:00:00</p>
+            <!-- ボタン -->
+            <div>
+                <button id="start_stop" class="btn btn-lg btn-primary">START</button>
+            </div>
+        </div>
+        
+        <!-- ラップタイム表示部 -->
+        <div id="lap" class="alert alert-secondary">
+            <h4>Lap</h4>
+            <div class="alert alert-light">
+                <div style="width: 150px;" class="mx-auto">
+                    <ol id="lap_time" class="my-0">                        
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // グローバル変数として宣言
+        var start;
+        var timer_id;
+
+        // ボタンがクリックされたときの処理
+        document.getElementById('start_stop').addEventListener('click', function () {
+            if (this.innerHTML === "START") {
+                // 開始時点の秒数を保存
+                start = new Date();
+                // 10ミリ秒ごとにgoTimerを実行し，時計を更新する
+                timer_id = setInterval(goTimer, 10);
+
+                // STOPボタンにする
+                this.innerHTML = "STOP";
+                this.classList.remove("btn-primary");
+                this.classList.add('btn-danger');
+            } else {
+                // setIntervalの停止
+                clearInterval(timer_id);
+                // STARTボタンにする
+                this.innerHTML = "START";                
+                this.classList.remove('btn-danger');
+                this.classList.add("btn-primary");
+                
+                // lapを表示させる
+                document.getElementById("lap").style.display = "block";
+
+                // lapに記録を保存
+                var laptime = document.getElementById('timer').innerHTML;
+                var li = document.createElement("li");
+                li.innerHTML = laptime;
+                document.getElementById("lap_time").appendChild(li);
+            }
+        });
+
+        var goTimer = function () {
+            var now = new Date();
+            var milli = now.getTime() - start.getTime()
+            var seconds = Math.floor(milli / 1000);
+            var minutes = Math.floor(seconds / 60);
+            var hours = Math.floor(minutes / 60);
+            
+            seconds = seconds - minutes * 60;
+            minutes = minutes - hours * 60;
+
+            document.getElementById('timer').innerHTML = addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds);
+        }
+
+        var addZero = function (x) {
+            if (x < 10) {
+                x = '0' + x
+            }
+            return x
+        }
+    </script>
+</body>
+</html>
