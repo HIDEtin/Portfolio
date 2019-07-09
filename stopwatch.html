@@ -61,11 +61,11 @@
     </div>
 
     <script>
-        // グローバル変数として宣言
+        // グローバル変数として宣言"var"は意図しない動作の防止
         var start;
         var timer_id;
 
-        // ボタンがクリックされたときの処理
+        // ボタンがクリックされたときの処理↓
         document.getElementById('start_stop').addEventListener('click', function () {
             if (this.innerHTML === "START") {
                 // 開始時点の秒数を保存
