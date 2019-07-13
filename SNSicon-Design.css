@@ -1,0 +1,79 @@
+	
+.fa-hatena:before {
+  font-family: Verdana;
+  font-weight: bold;
+  content: 'B!';
+}
+ 
+.share {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+ 
+.share ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+ 
+.share ul:after {
+  display: block;
+  clear: both;
+  content: '';
+}
+ 
+.share li {
+  float: left;
+  width: 25%;
+  margin: 0;
+  margin-top: 15px;
+}
+ 
+.share li a {
+  font-size: 14px;
+  display: block;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+}
+ 
+.share li a:hover {
+  opacity: .8;
+}
+ 
+.share li a:visited {
+  color: #fff;
+}
+ 
+.tweet a {
+  background-color: #55acee;
+}
+ 
+.facebook a {
+  background-color: #315096;
+}
+ 
+.googleplus a {
+  background-color: #dd4b39;
+}
+ 
+.hatena a {
+  background-color: #008fde;
+}
+ 
+@media(max-width: 599px) {
+  .share li {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 3px;
+  }
+  .share li i {
+    font-size: 1.3em;
+    padding-top: 3px;
+  }
+  .share li span {
+    display: none;
+  }
+}
